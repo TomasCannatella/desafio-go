@@ -1,13 +1,39 @@
 package tickets
 
+import (
+	"errors"
+	"fmt"
+)
+
 type Ticket struct {
+	Id          int
+	Name        string
+	Email       string
+	Destination string
+	Time        string
+	Price       int
 }
 
-// ejemplo 1
-func GetTotalTickets(destination string) (int error) {}
+var ErrorInvalidField error = errors.New("invalid field")
 
-// ejemplo 2
-func GetMornings(time string) (int error) {}
-
-// ejemplo 3
-func AverageDestination(destination string, total int) (int error) {}
+func CheckTicketContent(ticket Ticket) (err error) {
+	if ticket.Id == 0 {
+		err = fmt.Errorf("id %w", ErrorInvalidField)
+	}
+	if ticket.Name == "" {
+		err = fmt.Errorf("name %w", ErrorInvalidField)
+	}
+	if ticket.Email == "" {
+		err = fmt.Errorf("email %w", ErrorInvalidField)
+	}
+	if ticket.Destination == "" {
+		err = fmt.Errorf("destination %w", ErrorInvalidField)
+	}
+	if ticket.Time == "" {
+		err = fmt.Errorf("time %w", ErrorInvalidField)
+	}
+	if ticket.Price == 0 {
+		err = fmt.Errorf("price %w", ErrorInvalidField)
+	}
+	return
+}
